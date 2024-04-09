@@ -14,7 +14,10 @@ export class ServerService {
   getMoto(): Observable<Moto[]> {
     return this.http.get<Moto[]>(`${this.url}`) as Observable<Moto[]>;
   }
-  addMoto(data: Moto): Observable<Moto> {
+
+  addMoto(moto: Moto): Observable<Moto> {
+    const { ...motos } = moto;
+    const data: Moto = { ...motos };
     return this.http.post<Moto>(this.url, data) as Observable<Moto>;
   }
   deleteMoto(model: string): Observable<Moto> {

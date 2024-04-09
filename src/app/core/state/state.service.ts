@@ -6,18 +6,22 @@ import { ServerService } from '../server/server.service';
   providedIn: 'root',
 })
 export class StateService {
-  private service = inject(ServerService);
+  private serverService = inject(ServerService);
   private _motoState = signal<Moto[]>([]);
   public motoState = this._motoState.asReadonly();
-  constructor() {}
-  loadMoto() {
-    this.service.getMoto().subscribe((motos) => {
-      this._motoState.update(() => motos); //togliere parentesi quare
+
+  constructor() {
+    this.loadServerMoto();
+  }
+
+  loadServerMoto() {
+    this.serverService.getMoto().subscribe((motos) => {
+      this._motoState.update(() => motos);
     });
   }
-  addMoto({ ...motos }: Moto) {
-    const newMoto: Moto = {
-      ...motos,
-    };
+  addMoto(data: Moto): void {
+    this.serverService.addMoto(data).subscribe((moto) => {
+      this._motoState.update((motos) => [...motos, moto]);
+    });
   }
 }
