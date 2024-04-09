@@ -1,15 +1,15 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Moto } from '../../core/model/model';
-import { ServerService } from '../../core/server/server.service';
+import { Component, inject } from '@angular/core';
 import { CardComponent } from '../card/card.component';
+import { StateService } from '../../core/state/state.service';
 
 @Component({
   selector: 'app-list',
   standalone: true,
+  imports: [CardComponent],
   template: `
     <div class="main">
-      @for (item of moto; track $index) {
-      <app-card />
+      @for (item of motoService.motoState(); track $index) {
+      <app-card [moto]="item"></app-card>
       }
     </div>
   `,
@@ -21,19 +21,18 @@ import { CardComponent } from '../card/card.component';
     }
 
   }`,
-  imports: [CardComponent],
 })
-export default class ListComponent implements OnInit {
-  moto: Moto[] = [];
+export default class ListComponent /* implements OnInit */ {
+  /* moto: Moto[] = []; */
 
-  private service = inject(ServerService);
+  motoService = inject(StateService);
 
-  ngOnInit(): void {
+  /* ngOnInit(): void {
     this.service.getMoto().subscribe({
       next: (data: Moto[]) => {
         this.moto = data;
         console.log(this.moto);
       },
     });
-  }
+  } */
 }

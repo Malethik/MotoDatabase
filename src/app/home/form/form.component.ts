@@ -40,7 +40,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
       <button type="submit">SUBMIT</button>
     </form>
   `,
-  styles: ``,
+  styles: `.form-container {
+  height: 69.9vh;
+  width: 100%;
+}
+`,
 })
 export default class FormComponent {
   private fb = inject(FormBuilder);
