@@ -12,12 +12,14 @@ export class ServerService {
   constructor(private http: HttpClient) {}
 
   getMoto(): Observable<Moto> {
-    return this.http.get<Moto>(this.url);
+    return this.http.get<Moto>(`${this.url}`) as Observable<Moto>;
   }
   addMoto(data: Moto): Observable<Moto> {
-    return this.http.post<Moto>(this.url, data);
+    return this.http.post<Moto>(this.url, data) as Observable<Moto>;
   }
   deleteMoto(model: string): Observable<Moto> {
-    return this.http.delete<Moto>(`${this.url}` + `?model=` + `${model}`);
+    return this.http.delete<Moto>(
+      `${this.url}` + `?model=` + `${model}`
+    ) as Observable<Moto>;
   }
 }

@@ -28,12 +28,5 @@ export default class ListComponent implements OnInit {
 
   private service = inject(ServerService);
 
-  ngOnInit(): void {
-    this.service.getMoto().subscribe({
-      next: (data) => {
-        this.moto = data;
-        console.log(this.moto);
-      },
-    });
-  }
+  ngOnInit(): void {}
 }
