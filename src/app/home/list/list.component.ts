@@ -8,9 +8,9 @@ import { CardComponent } from '../card/card.component';
   standalone: true,
   template: `
     <div class="main">
-      <!--     @for (item of moto; track $index) {
+      @for (item of moto; track $index) {
       <app-card />
-      } -->
+      }
     </div>
   `,
   styles: `
@@ -24,9 +24,16 @@ import { CardComponent } from '../card/card.component';
   imports: [CardComponent],
 })
 export default class ListComponent implements OnInit {
-  moto!: Moto;
+  moto: Moto[] = [];
 
   private service = inject(ServerService);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.getMoto().subscribe({
+      next: (data: Moto[]) => {
+        this.moto = data;
+        console.log(this.moto);
+      },
+    });
+  }
 }

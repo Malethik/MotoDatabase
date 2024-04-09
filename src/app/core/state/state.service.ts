@@ -12,10 +12,12 @@ export class StateService {
   constructor() {}
   loadMoto() {
     this.service.getMoto().subscribe((motos) => {
-      this._motoState.update(() => [motos]); //togliere parentesi quare
+      this._motoState.update(() => motos); //togliere parentesi quare
     });
   }
-  addMoto({ make, model }: Moto) {
-    const newMoto: Moto = { make: make, model: model };
+  addMoto({ ...motos }: Moto) {
+    const newMoto: Moto = {
+      ...motos,
+    };
   }
 }

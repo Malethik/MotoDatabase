@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ServerService {
-  url = 'http://localhost:3000/';
+  url = 'http://localhost:3000/moto';
 
   constructor(private http: HttpClient) {}
 
-  getMoto(): Observable<Moto> {
-    return this.http.get<Moto>(`${this.url}`) as Observable<Moto>;
+  getMoto(): Observable<Moto[]> {
+    return this.http.get<Moto[]>(`${this.url}`) as Observable<Moto[]>;
   }
   addMoto(data: Moto): Observable<Moto> {
     return this.http.post<Moto>(this.url, data) as Observable<Moto>;
