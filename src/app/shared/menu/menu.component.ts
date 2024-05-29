@@ -17,4 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
   `,
   styles: ``,
 })
-export class MenuComponent {}
+export class MenuComponent {
+  constructor() {}
+}
